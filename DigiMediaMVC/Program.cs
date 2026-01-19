@@ -1,3 +1,6 @@
+using DigiMediaMVC.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace DigiMediaMVC
 {
     public class Program
@@ -5,6 +8,9 @@ namespace DigiMediaMVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<DigiMediaDbContext>(options => 
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
