@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DigiMediaMVC.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [AutoValidateAntiforgeryToken]
     public class ProjectController : Controller
     {
         private readonly DigiMediaDbContext _context;
@@ -118,6 +120,8 @@ namespace DigiMediaMVC.Areas.Admin.Controllers
                 Name = project.Name,
                 SpecialityId = project.SpecialityId
             };
+
+            await _sendSpecialitiesWithViewBag();
 
             return View(vm);
         }

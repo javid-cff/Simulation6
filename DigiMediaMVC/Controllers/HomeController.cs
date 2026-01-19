@@ -1,21 +1,27 @@
 using System.Diagnostics;
+using System.Threading.Tasks;
+using DigiMediaMVC.Contexts;
 using DigiMediaMVC.Models;
+using DigiMediaMVC.ViewModels.ProjectViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigiMediaMVC.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(DigiMediaDbContext _context, ILogger<HomeController> _logger) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public async Task<IActionResult> Index()
         {
-            _logger = logger;
-        }
+            var projects = await _context.Projects.Select(x => new ProjectGetVM()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                ImagePath = x.ImagePath,
+                SpecialityName = x.Speciality.Name
 
-        public IActionResult Index()
-        {
-            return View();
+            }).ToListAsync();
+
+            return View(projects);
         }
 
         public IActionResult Privacy()

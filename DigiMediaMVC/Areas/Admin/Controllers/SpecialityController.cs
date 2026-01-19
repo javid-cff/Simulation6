@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DigiMediaMVC.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [AutoValidateAntiforgeryToken]
     public class SpecialityController(DigiMediaDbContext _context) : Controller
     {
         public async Task<IActionResult> Index()

@@ -1,4 +1,5 @@
-﻿
+﻿@model List<ProjectGetVM>
+
   <!-- ***** Header Area End ***** -->
 
   <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
@@ -343,71 +344,24 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="loop owl-carousel">
-            <div class="item">
-              <a href="#">
-                <div class="portfolio-item">
-                <div class="thumb">
-                  <img src="~/assets/images/portfolio-01.jpg" alt="">
-                </div>
-                <div class="down-content">
-                  <h4>Website Builder</h4>
-                  <span>Marketing</span>
-                </div>
-              </div>
-              </a>  
-            </div>
-            <div class="item">
-              <a href="#">
-                <div class="portfolio-item">
-                <div class="thumb">
-                  <img src="~/assets/images/portfolio-01.jpg" alt="">
-                </div>
-                <div class="down-content">
-                  <h4>Website Builder</h4>
-                  <span>Marketing</span>
-                </div>
-              </div>
-              </a>  
-            </div>
-            <div class="item">
-              <a href="#">
-                <div class="portfolio-item">
-                <div class="thumb">
-                  <img src="~/assets/images/portfolio-02.jpg" alt="">
-                </div>
-                <div class="down-content">
-                  <h4>Website Builder</h4>
-                  <span>Marketing</span>
-                </div>
-              </div>
-              </a>  
-            </div>
-            <div class="item">
-              <a href="#">
-                <div class="portfolio-item">
-                <div class="thumb">
-                  <img src="~/assets/images/portfolio-03.jpg" alt="">
-                </div>
-                <div class="down-content">
-                  <h4>Website Builder</h4>
-                  <span>Marketing</span>
-                </div>
-              </div>
-              </a>  
-            </div>
-            <div class="item">
-              <a href="#">
-                <div class="portfolio-item">
-                <div class="thumb">
-                  <img src="~/assets/images/portfolio-04.jpg" alt="">
-                </div>
-                <div class="down-content">
-                  <h4>Website Builder</h4>
-                  <span>Marketing</span>
-                </div>
-              </div>
-              </a>  
-            </div>
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="item">
+                            <a href="#">
+                                <div class="portfolio-item">
+                                    <div class="thumb">
+                                        <img src="~/assets/images/@item.ImagePath" alt="@item.Name">
+                                    </div>
+                                    <div class="down-content">
+                                        <h4>@item.Name</h4>
+                                        <span>@item.SpecialityName</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                    
           </div>
         </div>
       </div>

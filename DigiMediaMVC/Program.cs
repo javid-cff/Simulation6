@@ -1,4 +1,6 @@
 using DigiMediaMVC.Contexts;
+using DigiMediaMVC.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace DigiMediaMVC
@@ -11,6 +13,20 @@ namespace DigiMediaMVC
 
             builder.Services.AddDbContext<DigiMediaDbContext>(options => 
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+
+                options.Lockout.MaxFailedAccessAttempts = 3;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 8;
+            }).AddEntityFrameworkStores<DigiMediaDbContext>().AddDefaultTokenProviders();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
